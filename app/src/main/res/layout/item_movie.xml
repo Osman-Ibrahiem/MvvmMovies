@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.domain.common.model.Movie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/image_card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:layout_constraintBottom_toTopOf="@id/title"
+            app:layout_constraintDimensionRatio="3:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintWidth_max="@dimen/_150sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:listener="@{(isLoad) -> imageLoader.setVisibility(!isLoad ? View.VISIBLE : View.GONE)}"
+                app:loadImage="@{item.poster}"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/image_loader"
+                style="@style/AVLoadingIndicatorView.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:indicatorColor="@color/black"
+                app:indicatorName="LineSpinFadeLoaderIndicator"
+                tools:visibility="visible" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/votes_card"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            app:cardCornerRadius="@dimen/_20sdp"
+            app:cardBackgroundColor="#081C22"
+            app:layout_constraintBottom_toBottomOf="@id/image_card"
+            app:layout_constraintEnd_toEndOf="@id/image_card"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintStart_toStartOf="@id/image_card"
+            app:layout_constraintTop_toBottomOf="@id/image_card">
+
+            <com.osman.themoviedb.views.CircleProgressBar
+                android:id="@+id/progress_votes"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center"
+                app:progressbarWithAnimation="@{item.votes}"
+                app:progressBarThickness="@dimen/_2sdp"
+                app:progressbarColor="@{item.votesColor}" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/votes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{item.votesString}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/image_card"
+                app:layout_constraintStart_toStartOf="@id/image_card"
+                app:layout_constraintTop_toBottomOf="@id/votes_card"
+                tools:text="80%" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:text="@{item.title}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/date"
+            app:layout_constraintEnd_toEndOf="@id/image_card"
+            app:layout_constraintStart_toStartOf="@id/image_card"
+            app:layout_constraintTop_toBottomOf="@id/image_card"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="@tools:sample/full_names" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="@{item.date}"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/image_card"
+            app:layout_constraintStart_toStartOf="@id/image_card"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TMDB</string>
+
+    <string name="login_message">Please Enter A valid email and password, We only will check them.</string>
+
+    <string name="no_results">No Results</string>
+    <string name="retry">retry</string>
+    <string name="hint_email">Email</string>
+    <string name="btn_login">Login</string>
+    <string name="hint_password">Password</string>
+
+</resources>
